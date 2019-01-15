@@ -1,0 +1,17 @@
+{
+  "name": "glitch-prettier",
+  "version": "1.0.0",
+  "description": "Apply Prettier to a Glitch Editor",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build && web-ext run -s extension",
+    "build": "cp node_modules/prettier/standalone.js extension/prettier.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Potch",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "1.15.3",
+    "web-ext": "^2.9.3"
+  }
+}

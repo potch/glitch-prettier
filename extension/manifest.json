@@ -1,0 +1,21 @@
+{
+	"manifest_version": 2,
+	"name": "Glitch Prettier",
+	"description": "Apply Prettier to the contents of a glitch editor",
+	"version": "1.0.0",
+	"icons": {
+		"64": "icons/icon.png"
+	},
+	"content_scripts": [
+		{
+			"matches": [
+				"https://glitch.com/edit/*"
+			],
+			"js": [
+				"prettier.js",
+				"babylon.js",
+				"content_script.js"
+			]
+		}
+	]
+}
