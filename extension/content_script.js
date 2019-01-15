@@ -3,6 +3,12 @@
 console.log('prettier', prettier);
 console.log('babylon', prettierPlugins);
 
+browser.runtime.onMessage.addListener(msg => {
+  if (msg.action === 'format') {
+    doAutoFormat();
+  }
+});
+
 let notification = document.createElement('div');
 notification.classList = 'notification notifyAutoFormat hidden';
 notification.innerHTML = 'code formatted!';
