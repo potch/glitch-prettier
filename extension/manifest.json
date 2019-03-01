@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "Glitch Prettier",
 	"description": "Apply Prettier to the contents of a glitch editor",
-	"version": "1.0.0",
+	"version": "2.0.0",
 	"icons": {
 		"64": "icons/icon.png"
 	},
@@ -17,7 +17,13 @@
 			"32": "icons/carp.svg"
 		},
 		"default_title": "Glitch Prettier"
-	},	
+	},
+	"options_ui": {
+    "page": "/settings.html"
+	},
+	"permissions": [
+		"storage"
+	],
 	"content_scripts": [
 		{
 			"matches": [
@@ -25,7 +31,11 @@
 			],
 			"js": [
 				"prettier.js",
-				"babylon.js",
+				"parsers/parser-babylon.js",
+				"parsers/parser-html.js",
+				"parsers/parser-graphql.js",
+				"parsers/parser-markdown.js",
+				"parsers/parser-postcss.js",
 				"content_script.js"
 			]
 		}

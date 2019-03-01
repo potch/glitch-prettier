@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      html {
+        font: message-box;
+      }
+      body {
+        font-size: 1.25rem;
+        line-height: 1.4
+      }
+      article {
+        padding: 6px;
+      }
+      textarea {
+        display: block;
+        width: 100%;
+        margin-bottom: 1em;
+        height: 10em;
+        resize: vertical;
+        font: monospace;
+        font-size: 1.36rem;
+        border: 1px solid rgb(215, 215, 219);
+      }
+      textarea.error {
+        border: 1px solid red;
+      }
+      button, input {
+        font: inherit;
+        font-size: 1.36rem;
+        border: 1px solid rgb(215, 215, 219);
+        line-height: 2em;
+        border-radius: 2px;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+      button {
+        float: right;
+        background-color: rgb(249, 249, 250);
+        border-radius: 2px;
+      }
+      button:hover {
+        background-color: rgb(235, 235, 235);
+      }
+      button:active {
+        background-color: rgb(218, 218, 218);
+      }
+      button::-moz-focus-inner {
+        padding: 0 !important;
+        border: 0 none !important;
+      }
+      h2 {
+        font-size: 1.5rem;
+        font-weight: normal;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="settings">
+      <h2>Options</h2>
+      <textarea class="user-config" placeholder="{}"></textarea></textarea>
+      <button class="save">Save</button>
+    </article>
+    <script src="/settings.js"></script>
+  </body>
+</html>

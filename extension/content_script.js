@@ -1,8 +1,5 @@
 // Put all the javascript code here, that you want to execute after page load.
 
-console.log('prettier', prettier);
-console.log('babylon', prettierPlugins);
-
 browser.runtime.onMessage.addListener(msg => {
   if (msg.action === 'format') {
     doAutoFormat();
@@ -17,18 +14,34 @@ let notificationTimeout;
 
 window.addEventListener('keypress', function (e) {
   if (e.key === 'ƒ' && e.ctrlKey && e.altKey & !e.shiftKey && !e.metaKey) {
-    doAutoFormat();
+    doAutoFormat().catch(e => console.error(e));
   }
 });
 
-function doAutoFormat() {
-  let editor = window.wrappedJSObject.application.editor();
+let userOptions = {
+  trailingComma: 'all',
+  arrowParens: 'always',
+  printWidth: 150,
+  singleQuote: true,
+};
+
+async function doAutoFormat() {
+  let userOptions; 
+  try {
+    let settings = await browser.storage.local.get('userOptions');
+    userOptions = JSON.parse(settings.userOptions);
+  } catch (e) {
+    userOptions = {};
+  }
+  let application = window.wrappedJSObject.application;
+  let editor = application.editor();
   let cursor = editor.doc.getCursor();
   let code = editor.doc.getValue();
-  let formattedCode = prettier.format(code, {
-    parser: 'babylon',
-    plugins: prettierPlugins
-  });
+  let filepath = application.selectedFile().path();
+  let formattedCode = prettier.format(code, Object.assign({
+    plugins: prettierPlugins,
+    filepath: filepath
+  }, userOptions));
   editor.doc.setValue(formattedCode);
   editor.doc.setCursor(cursor);
   notification.classList.remove('hidden');
